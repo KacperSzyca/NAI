@@ -1,7 +1,8 @@
 import cv2
 
 
-cap = cv2.VideoCapture(0)
+#cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture("Resources/video.mp4")
 cap.set(3,640) #id 3 = szerokosc
 cap.set(4,480) #id 4 = wysokosc
 
