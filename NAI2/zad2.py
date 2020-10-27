@@ -57,8 +57,10 @@ while (cap.isOpened()):
         today = datetime.now()
         d4 = today.strftime("%b-%d-%Y_%H-%M-%S")
         d4 = d4 + '.png'
-        print(d4)
-        cv2.imwrite(d4, frame)
+        roi = cv2.selectROI(frame)
+        roi_cropped = frame[int(roi[1]):int(roi[1] + roi[3]), int(roi[0]):int(roi[0] + roi[2])]
+        cv2.imshow("ROI", roi_cropped)
+        cv2.imwrite(d4, roi_cropped)
 
     if cv2.waitKey(1) & 0xFF ==ord('q'):
         break
