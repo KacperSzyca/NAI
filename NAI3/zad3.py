@@ -56,7 +56,7 @@ while (cap.isOpened()):
 
     sorteddata = sorted(zip(areaArray, contours), key=lambda x: x[0], reverse=True)
 
-    cv2.drawContours(img, contour, -1, (0, 255, 0), 3)
+    #cv2.drawContours(img, contour, -1, (0, 255, 0), 3)
 
     largestContours = []
     if len(sorteddata) > 1:
@@ -67,6 +67,8 @@ while (cap.isOpened()):
     cX = []
     cY = []
     listH=[]
+    minY=[]
+    maxY=[]
 
     #https: // www.pyimagesearch.com / 2016 / 02 / 01 / opencv - center - of - contour /
     if len(sorteddata) > 1:
@@ -77,12 +79,14 @@ while (cap.isOpened()):
                 cX.append(int(M["m10"] / M["m00"]))
                 cY.append(int(M["m01"] / M["m00"]))
                 x, y, w, h = cv2.boundingRect(sorteddata[1][1])
-                listH.append(h)
+                minY.append(cY[c]-(h/2))
+                maxY.append(cY[c] + (h / 2))
 
 
 
     if len(cY) == 2:
-        if (cX[0] - listH[0]/2) <= cX[1] or (cX[0] + listH[0]/2) >= cX[1]:
+        #sprawdzac gore z dolem
+        if ((minY[0] > minY[1] and minY[0] < maxY[1]) or (maxY[0] < maxY[1] and maxY[0] > minY[1])):
             cv2.arrowedLine(img, (cX[0], cY[0]), (cX[1], cY[1]), (0, 255, 255), 2)
 
 
