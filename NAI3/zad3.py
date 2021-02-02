@@ -66,7 +66,6 @@ while (cap.isOpened()):
 
     cX = []
     cY = []
-    listH=[]
     minY=[]
     maxY=[]
 
