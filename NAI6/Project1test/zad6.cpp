@@ -32,7 +32,6 @@ int main()
 
     uniform_real_distribution<double> uniform_dist(-10, 10);
     int max_iterations = 100000;
-    int function = 3;
 
 
 
@@ -55,8 +54,9 @@ int main()
     };
 
    
-
-    auto goal = function == 1 ? booth : function == 2? himmelblau : matyas;
+    auto goal = booth;
+    //auto goal = himmelblau;
+    //auto goal = matyas;
    
 
     auto neighbours = [](vector<double> x, double dx = 0.001) {
