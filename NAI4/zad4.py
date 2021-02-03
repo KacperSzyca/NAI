@@ -42,7 +42,11 @@ while (cap.isOpened()):
     higher_hsv = np.array([ihighH, ihighS, ihighV])
 
     # Apply the cv2.inrange method to create a mask
-    mask = cv2.inRange(img, lower_hsv, higher_hsv)
+    #mask = cv2.inRange(img, lower_hsv, higher_hsv)
+    # 0 0 0 104 49 255
+    #lower_hsv = np.array([0, 0, 0], dtype=np.uint8)
+    #higher_hsv = np.array([0, 0, 255], dtype=np.uint8)
+    mask = cv2.inRange(hsv, lower_hsv, higher_hsv)
 
     contours, hierachy = cv2.findContours(mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
 
@@ -66,7 +70,9 @@ while (cap.isOpened()):
                 matrix = cv2.getPerspectiveTransform(pst1, pst2)
                 cropped = cv2.warpPerspective(img, matrix, (w, h))
                 hsv = cv2.cvtColor(cropped, cv2.COLOR_BGR2HSV)
-                mask1 = cv2.inRange(hsv, (36, 25, 25), (70, 255, 255))
+                #mask1 = cv2.inRange(hsv, (36, 25, 25), (70, 255, 255)) # zielony
+                #mask1 = cv2.inRange(hsv, (155, 25, 0), (179, 255, 255))    # czerwony
+                mask1 = cv2.inRange(hsv, (25, 52, 72), (102, 255, 255)) # zielony inny
                 geryContours, hierachy = cv2.findContours(mask1, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
                 for greenContour in geryContours:
                     greenArea = cv2.contourArea(greenContour)
