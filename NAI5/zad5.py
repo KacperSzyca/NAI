@@ -23,14 +23,18 @@ while True:
 
     matches = []
     for (x, y, w, h) in bikes:
+        cv2.rectangle(img, (x, y), (x + w, y + h), (0, 255, 255), 2)
+
         bikeCy=int(y+h/2)
         lineCy=height-200
 
         #margines 16 px, naliczane w momencie najechania na linie
         if(bikeCy<lineCy+8 and bikeCy>lineCy-8):
             count += 1
+            cv2.rectangle(img, (x, y), (x + w, y + h), (255, 0, 0), 2)
         cv2.putText(img, "bike", (x, y), cv2.QT_FONT_NORMAL, 1, (0, 0, 0), 2)
-        cv2.rectangle(img, (x, y), (x + w, y + h), (0, 255, 255), 2)
+
+
 
 
     cv2.putText(img, "Count: " + str(count), (width-170, height-10), cv2.FONT_ITALIC, 1, (0, 0, 0), 2)

@@ -95,9 +95,7 @@ while (cap.isOpened()):
                         elif ((greenY < h/3) and (greenX > w/3 )):
                             cropped = cv2.rotate(cropped, cv2.cv2.ROTATE_90_CLOCKWISE)
                         elif ((greenY > h/3) and (greenX < w/3 )):
-                            cropped = cv2.rotate(cropped, cv2.cv2.ROTATE_90_CLOCKWISE)
-                            cropped = cv2.rotate(cropped, cv2.cv2.ROTATE_90_CLOCKWISE)
-                            cropped = cv2.rotate(cropped, cv2.cv2.ROTATE_90_CLOCKWISE)
+                            cropped = cv2.rotate(cropped, cv2.cv2.ROTATE_90_COUNTERCLOCKWISE)
                         cv2.imwrite(d4, cropped)
 
     try:

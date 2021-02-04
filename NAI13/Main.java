@@ -11,15 +11,16 @@ import java.io.IOException;
 public class Main {
     public static void main(String[] args) throws Exception {
         try {
-            BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\user\\Desktop\\NAI13-Grafy\\dane.txt"));
-            String line = reader.readLine();
-            int wierzcholki = Integer.parseInt(line);
-            Graph graph = new Graph(wierzcholki+1);
-            while(1 == 1){
+            BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\user\\PycharmProjects\\NAI\\java\\NAI13-Grafy\\dane.txt"));
+
+
+            Graph graph = new Graph();
+            String line;
+            for(int i=0; 1==1;i++){
                 line = reader.readLine();
                 if(line==null)
                     break;
-                addEdge(graph,line);
+                addEdge(graph,line, i);
             }
             reader.close();
 
@@ -29,9 +30,9 @@ public class Main {
         }
     }
 
-    public static void addEdge(Graph graph,String line){
+    public static void addEdge(Graph graph,String line, int number){
         int start = Integer.parseInt(line.substring(line.indexOf("$") + 1, line.indexOf("!")));
         int end = Integer.parseInt(line.substring(line.indexOf("&") + 1, line.indexOf("#")));
-        graph.addEdge(start,end);
+        graph.addEdge(start,end, number);
     }
 }

@@ -7,34 +7,33 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.RenderedImage;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 
 import static guru.nidi.graphviz.engine.Format.PNG;
 
 public class Graph {
-    private final Integer[][] pos;
-    private final int wierzcholki;
+    private List<GraphRow> graphRows = new ArrayList<>();
 
-    public Graph(int wierzcholki) {
-        this.wierzcholki = wierzcholki;
-        this.pos = new Integer[wierzcholki][wierzcholki];
+    public Graph() {
     }
 
-    public void addEdge(int start,int end){
-        pos[start][end] = 1;
+    public void addEdge(int start,int end, int iterator){
+        graphRows.add(new GraphRow(start,end,iterator));
     }
 
     public void print() {
-        String src = "digraph prof { ";
-        for (int i = 0; i < wierzcholki; i++) {
-            for (int j = 0; j < wierzcholki; j++) {
-                if (pos[i][j] != null) {
-                    src += "\"" + i  + "\" -> \"" + j + "\" ";
-                }
-            }
+       // graphRows.sort(Comparator.comparing(GraphRow::getNumer));
+        String src = "digraph G { \n ";
+        for (int i = 0; i < graphRows.size(); i++) {
+                    src += "\"" + graphRows.get(i).getX()  + "\" -> \"" + graphRows.get(i).getY()  + "\" \n";
+
         }
         src+= " }";
+
         try{
-            Graphviz.fromString(src).render(PNG).toFile(new File("C:\\Users\\user\\Desktop\\NAI13-Grafy\\test.png"));
+            Graphviz.fromString(src).render(PNG).toFile(new File("test.png"));
         }catch (Exception e){
             e.printStackTrace();
         }
